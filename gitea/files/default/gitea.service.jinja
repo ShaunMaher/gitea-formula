@@ -1,0 +1,20 @@
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import gitea with context %}
+[Unit]
+Description=Gitea (A painless self-hosted Git service)
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User={{ gitea.user }}
+Group={{ gitea.user }}
+WorkingDirectory={{ gitea.working_dir }}
+ExecStart={{ gitea.install_dir }}/gitea web -c {{ gitea.conf_file }}
+Restart=always
+Environment=USER={{ gitea.user }}
+Environment=HOME={{ gitea.home_dir }}
+Environment=GITEA_WORK_DIR={{ gitea.working_dir }}
+
+[Install]
+WantedBy=multi-user.target

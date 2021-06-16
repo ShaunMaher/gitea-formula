@@ -5,4 +5,4 @@ include:
   - .package
   - .config
   - .service
-  - .subcomponent
+  - .system-user

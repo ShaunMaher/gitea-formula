@@ -9,8 +9,6 @@
 include:
   - {{ sls_config_clean }}
 
-gitea-package-clean-pkg-removed:
-  pkg.removed:
-    - name: {{ gitea.pkg.name }}
-    - require:
-      - sls: {{ sls_config_clean }}
+gitea-binary:
+  file.absent:
+    - name: {{ gitea.install_dir }}/gitea

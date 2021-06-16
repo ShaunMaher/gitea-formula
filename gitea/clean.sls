@@ -2,7 +2,7 @@
 # vim: ft=sls
 
 include:
-  - .subcomponent.clean
+  - .system-user.clean
   - .service.clean
   - .config.clean
   - .package.clean

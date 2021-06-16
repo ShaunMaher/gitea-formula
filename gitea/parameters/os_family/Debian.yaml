@@ -14,5 +14,14 @@
 values:
   pkg:
     name: gitea-debian
-  config: /etc/gitea.d/custom.conf
+  depends:
+    - git
+  # config: /etc/gitea.d/custom.conf
+  install_dir: /opt/gitea
+  conf_dir: /etc/gitea
+  working_dir: /var/lib/gitea
+  home_dir: /var/lib/gitea/home
+  data_dir: /var/lib/gitea/data
+  logs_dir: /var/log/gitea
+  repo_root_dir: /var/lib/gitea/repos
 ...
