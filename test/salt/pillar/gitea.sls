@@ -2,6 +2,8 @@
 # vim: ft=yaml
 ---
 gitea:
+  lookup:
+    home_dir: /tmp/gitea
   gitea_users:
     gitea-new2:
       username: gitea-new2
