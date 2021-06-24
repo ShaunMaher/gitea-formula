@@ -28,6 +28,7 @@ gitea-config-file-file-managed:
     - makedirs: True
     - template: jinja
     - require:
+      - sls: {{ sls_package_user }}
       - sls: {{ sls_package_install }}
     - context:
         gitea: {{ gitea | json }}
