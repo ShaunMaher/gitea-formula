@@ -400,7 +400,7 @@ suites:
               - gitea
               - define_roles
       pillars_from_files:
-        gitea.sls: pillar.example
+        gitea.sls: test/salt/pillar/gitea.sls
         define_roles.sls: test/salt/pillar/define_roles.sls
     verifier:
       inspec_tests:
@@ -431,7 +431,7 @@ suites:
               - gentoo
               - define_roles
       pillars_from_files:
-        gitea.sls: pillar.example
+        gitea.sls: test/salt/pillar/gitea.sls
         gentoo.sls: test/salt/pillar/gentoo.sls
         define_roles.sls: test/salt/pillar/define_roles.sls
     verifier:
