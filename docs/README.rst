@@ -5,7 +5,7 @@ gitea-formula
 
 |img_travis| |img_sr| |img_pc|
 
-.. |img_travis| image:: https://travis-ci.com/ShaunMaher/gitea-formula.svg?branch=master
+.. |img_travis| image:: https://travis-ci.com/ShaunMaher/gitea-formula.svg?branch=main
    :alt: Travis CI Build Status
    :scale: 100%
    :target: https://travis-ci.com/ShaunMaher/gitea-formula
