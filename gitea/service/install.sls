@@ -1,7 +1,7 @@
 {#- Get the `tplroot` from `tpldir` #}
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- set sls_package_install = tplroot ~ '.package.install' %}
-{%- set sls_package_user = tplroot ~ '.user' %}
+{%- set sls_package_user = tplroot ~ '.system-user' %}
 {%- from tplroot ~ "/map.jinja" import mapdata as gitea with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
@@ -13,6 +13,8 @@ gitea-systemd-file:
                               lookup='gitea-config-file-file-managed'
                  )
               }}
+    - require:
+      - sls: {{ sls_package_install }}
     - template: jinja
     - context:
         tpldir: {{ tpldir }}
@@ -30,6 +32,8 @@ gitea-reload-systemd:
     - recurse:
       - user
       - group
+    - require:
+      - sls: {{ sls_package_user }}
 
 {{ gitea.repo_root_dir }}:
   file.directory:
@@ -38,6 +42,8 @@ gitea-reload-systemd:
     - recurse:
       - user
       - group
+    - require:
+      - sls: {{ sls_package_user }}
 
 {{ gitea.data_dir }}:
   file.directory:
@@ -46,3 +52,5 @@ gitea-reload-systemd:
     - recurse:
       - user
       - group
+    - require:
+      - sls: {{ sls_package_user }}
