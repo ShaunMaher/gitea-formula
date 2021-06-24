@@ -11,12 +11,19 @@ values:
   binary_hash: https://dl.gitea.io/gitea/1.14.2/gitea-1.14.2-linux-amd64.sha256
   install_dir: /opt/gitea
   conf_dir: /etc/gitea
+  conf_file: app.ini
   working_dir: /var/lib/gitea
   home_dir: /var/lib/gitea/home
   data_dir: /var/lib/gitea/data
   logs_dir: /var/log/gitea
   repo_root_dir: /var/lib/gitea/repos
+  system_user: gitea
   service:
     name: gitea
+
+  # If true, this sets "INSTALL_LOCK" to false which tells Gitea NOT to show the
+  #  installation page.
+  install_completed: true
+  
   winner: defaults
 ...

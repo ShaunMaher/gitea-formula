@@ -8,7 +8,7 @@
 gitea-depends-installed:
   pkg.installed:
     - pkgs:
-  {%- for package in gitea.depends.name %}
+  {%- for package in gitea.depends %}
       - {{ package }}
   {% endfor %}
 

@@ -1,13 +1,14 @@
 {%- set tplroot = tpldir.split('/')[0] %}
-{%- from tplroot ~ "/map.jinja" import gitea with context %}
+{%- from tplroot ~ "/map.jinja" import mapdata as gitea with context %}
 
 {%- set config = salt['pillar.get']('gitea:config', {}) -%}
 
 {%- set data_dir = config.get('server_app_data_path', gitea.data_dir) -%}
 {%- set db_type = config.get('db_type', 'sqlite3') -%}
+{%- set install_lock = config.get('install_completed', gitea.install_completed) %}
 
 APP_NAME = {{ config.get('app_name', 'Gitea: Git with a cup of tea') }}
-RUN_USER = {{ config.get('run_user', gitea.user) }}
+RUN_USER = {{ config.get('run_user', gitea.system_user) }}
 RUN_MODE = {{ config.get('run_mode', 'prod') }}
 
 [repository]
@@ -49,7 +50,7 @@ PATH = {{ config.get('sqlite_db_file', data_dir ~ '/gitea.db') }}
 {%- endif %}
 
 [security]
-INSTALL_LOCK = true
+INSTALL_LOCK = {{ install_lock | string | lower }}
 SECRET_KEY = {{ config.get('security_secret_key', salt['grains.get_or_set_hash'](
     'gitea:security_secret_key',
     length=15,

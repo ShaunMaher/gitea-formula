@@ -24,6 +24,17 @@ gitea:
     # base directory for gitea repositories
     repo_root_dir: /var/lib/gitea/repos
 
+  gitea_users:
+  # User accounts that will be created within gitea.  If you have set
+  #  install_completed to true, you probably want to create at least one admin
+  #  (is_admin: true).
+    - gitea:
+      username: gitea
+      password: password
+      email: username@example.com
+      must_change_password: false
+      is_admin: true
+
   config:
     # These options generally map to <section>_<option> in the gitea config file
 
@@ -100,7 +111,7 @@ gitea:
     log_file_log_rotate: 'true'
 
     # defaults to '<conf_dir>/app.ini' if not defined
-    conf_file: /etc/gitea/config.ini
+    conf_file: config.ini
     # defaults to '<data_dir>/gitea.db' if not defined
     sqlite_db_file: /var/lib/gitea/gitea.sqlite3
     # defaults to '<data_dir>/sessions/' if not defined

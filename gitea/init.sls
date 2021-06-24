@@ -6,3 +6,4 @@ include:
   - .config
   - .service
   - .system-user
+  - .gitea-users

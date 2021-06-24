@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+dump_pillars=0
+log_level="warning"
+while getopts ":dp" opt; do
+  case ${opt} in
+    d)
+      log_level="debug"
+      ;;
+    p)
+      dump_pillars=1
+      ;;
+    ?)
+      echo "Invalid option: $OPTARG" 1>&2
+      exit 1
+      ;;
+    :)
+      echo "Invalid option: $OPTARG requires an argument" 1>&2
+      exit 1
+      ;;
+  esac
+done
+
+# TODO: Create the container
+# lxc init ubuntu:20.04 gitea-formula
+# lxc config device add gitea-formula gitea-formula disk source=/home/work/Projects/gitea-formula path=/tmp/gitea-formula
+# lxc start gitea-formula
+
+# TODO: bootstrap salt-minion installation
+# lxc exec gitea-formula -- bash -c "curl -L https://bootstrap.saltproject.io | sudo sh"
+
+if [ $dump_pillars -gt 0 ]; then
+  lxc exec gitea-formula -- bash -c "salt-call --local -l ${log_level} --file-root=/tmp/gitea-formula/ --pillar-root=/tmp/gitea-formula/test/salt/pillar/ pillar.items"
+else
+  lxc exec gitea-formula -- bash -c "salt-call --local -l ${log_level} --file-root=/tmp/gitea-formula/ --pillar-root=/tmp/gitea-formula/test/salt/pillar/ state.apply gitea"
+fi
