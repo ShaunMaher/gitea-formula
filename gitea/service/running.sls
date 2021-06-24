@@ -17,3 +17,12 @@ gitea-service-running-service-running:
     - enable: True
     - watch:
       - sls: {{ sls_config_file }}
+      # TODO: check_cmd: do something to make sure the service is listening on
+      # the desired port
+
+gitea-service-running-service-failed:
+  cmd.run:
+    # TODO: For systems that don't use systemd?
+    - name: systemctl status gitea.service
+    - onfail:
+      - service: gitea-service-running-service-running
