@@ -24,6 +24,6 @@ values:
   # If true, this sets "INSTALL_LOCK" to false which tells Gitea NOT to show the
   #  installation page.
   install_completed: true
-  
+
   winner: defaults
 ...

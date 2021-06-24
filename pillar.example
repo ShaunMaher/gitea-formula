@@ -25,10 +25,10 @@ gitea:
     repo_root_dir: /var/lib/gitea/repos
 
   gitea_users:
-  # User accounts that will be created within gitea.  If you have set
-  #  install_completed to true, you probably want to create at least one admin
-  #  (is_admin: true).
-    - gitea:
+    # User accounts that will be created within gitea.  If you have set
+    #  install_completed to true, you probably want to create at least one admin
+    #  (is_admin: true).
+    gitea:
       username: gitea
       password: password
       email: username@example.com
