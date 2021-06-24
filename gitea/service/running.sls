@@ -39,3 +39,10 @@ gitea-service-failed-doctor:
     - runas: {{ gitea.system_user }}
     - onfail:
       - service: gitea-service-running-service-running
+
+gitea-service-failed-unit-file:
+  cmd.run:
+    # TODO: For systems that don't use systemd?
+    - name: cat /etc/systemd/system/gitea.service
+    - onfail:
+      - service: gitea-service-running-service-running

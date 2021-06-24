@@ -7,6 +7,7 @@ gitea:
     data_dir: /tmp/gitea-data
     logs_dir: /tmp/gitea-logs
     repo_root_dir: /tmp/gitea-repo_root_dir
+    working_dir: /tmp/gitea-working_dir
   gitea_users:
     gitea-new2:
       username: gitea-new2

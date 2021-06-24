@@ -54,3 +54,13 @@ gitea-reload-systemd:
       - group
     - require:
       - sls: {{ sls_package_user }}
+
+{{ gitea.working_dir }}:
+  file.directory:
+    - user: {{ gitea.system_user }}
+    - group: {{ gitea.system_user }}
+    - recurse:
+      - user
+      - group
+    - require:
+      - sls: {{ sls_package_user }}
