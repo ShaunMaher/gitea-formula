@@ -3,9 +3,9 @@
 ---
 gitea:
   gitea_users:
-    gitea-new:
-      username: gitea-new
+    gitea-new2:
+      username: gitea-new2
       password: password
-      email: shaun-new@ghanima.net
+      email: shaun-new2@ghanima.net
       must_change_password: false
       is_admin: false
