@@ -6,14 +6,19 @@
 {%- for user in gitea.gitea_users %}
   {%- set extra_flags = "-c " ~ gitea.conf_dir ~ "/" ~ gitea.conf_file %}
   {%- set password_flags = "" %}
-  {%- if user.is_admin %}
+  {%- if gitea.gitea_users[user].is_admin %}
     {%- set extra_flags = extra_flags ~ " --admin" %}
   {%- endif %}
-  {%- if user.must_change_password %}
+  {%- if gitea.gitea_users[user].must_change_password %}
     {%- set password_flags = password_flags ~ " --must-change-password" %}
   {%- endif %}
-create-gitea-user-{{ user.username }}:
+  {%- set unless_cmd = "sudo -H -u " ~ gitea.system_user ~ " " ~ gitea.install_dir ~ "/gitea" ~
+     " admin user list " ~ extra_flags ~ " | grep '^[[:digit:]]*[[:space:]]*" ~ gitea.gitea_users[user].username ~ "[[:space:]]'" %}
+  {%- set create_command = "sudo -H -u " ~ gitea.system_user ~ " " ~ gitea.install_dir ~ "/gitea" ~
+     " admin user create --username " ~ gitea.gitea_users[user].username ~ " --email " ~ gitea.gitea_users[user].email ~ " --password " ~
+     gitea.gitea_users[user].password ~ " " ~ extra_flags ~ " " ~ password_flags %}
+create-gitea-user-{{ user }}:
   cmd.run:
-    - name: sudo -H -u {{ gitea.system_user }} {{ gitea.install_dir }}/gitea admin user create --username {{ user.username }} --email {{ user.email }} --password {{ user.password }} {{ extra_flags }} {{ password_flags }}
-    - unless: sudo -H -u {{ gitea.system_user }} {{ gitea.install_dir }}/gitea admin user list {{ extra_flags}} | grep "^[[:digit:]]*[[:space:]]*{{ user.username }}[[:space:]]"
+    - name: {{ create_command }}
+    - unless: {{ unless_cmd }}
 {% endfor %}

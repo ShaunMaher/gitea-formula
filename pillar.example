@@ -31,9 +31,9 @@ gitea:
     gitea:
       username: gitea
       password: password
-      email: username@example.com
+      email: user@example.com
       must_change_password: false
-      is_admin: true
+      is_admin: false
 
   config:
     # These options generally map to <section>_<option> in the gitea config file

@@ -32,5 +32,8 @@ done
 if [ $dump_pillars -gt 0 ]; then
   lxc exec gitea-formula -- bash -c "salt-call --local -l ${log_level} --file-root=/tmp/gitea-formula/ --pillar-root=/tmp/gitea-formula/test/salt/pillar/ pillar.items"
 else
-  lxc exec gitea-formula -- bash -c "salt-call --local -l ${log_level} --file-root=/tmp/gitea-formula/ --pillar-root=/tmp/gitea-formula/test/salt/pillar/ state.apply gitea"
+  pre-commit run --all-files --color always
+  if [ $? == 0 ]; then
+    lxc exec gitea-formula -- bash -c "salt-call --local -l ${log_level} --file-root=/tmp/gitea-formula/ --pillar-root=/tmp/gitea-formula/test/salt/pillar/ state.apply gitea"
+  fi
 fi
