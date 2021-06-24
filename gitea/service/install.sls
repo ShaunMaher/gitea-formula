@@ -30,3 +30,19 @@ gitea-reload-systemd:
     - recurse:
       - user
       - group
+
+{{ gitea.repo_root_dir }}:
+  file.directory:
+    - user: {{ gitea.system_user }}
+    - group: {{ gitea.system_user }}
+    - recurse:
+      - user
+      - group
+
+{{ gitea.data_dir }}:
+  file.directory:
+    - user: {{ gitea.system_user }}
+    - group: {{ gitea.system_user }}
+    - recurse:
+      - user
+      - group

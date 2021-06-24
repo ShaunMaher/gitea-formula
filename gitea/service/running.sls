@@ -20,9 +20,17 @@ gitea-service-running-service-running:
       # TODO: check_cmd: do something to make sure the service is listening on
       # the desired port
 
-gitea-service-running-service-failed:
+gitea-service-failed-journalctl:
   cmd.run:
     # TODO: For systems that don't use systemd?
-    - name: systemctl status gitea.service
+    - name: journalctl -xe -u gitea.service
+    - onfail:
+      - service: gitea-service-running-service-running
+
+gitea-service-failed-doctor:
+  cmd.run:
+    # TODO: For systems that don't use systemd?
+    - name: gitea.install_dir ~ "/gitea doctor -c /etc/gitea/app.ini --log-file -
+    - runas: {{ gitea.system_user }}
     - onfail:
       - service: gitea-service-running-service-running
