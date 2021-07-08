@@ -79,7 +79,7 @@ ENABLE_CAPTCHA = {{ config.get('service_enable_captcha', 'false')|lower }}
 {%- if mailer_enabled %}
 ENABLED = true
 HOST = {{ config.get('mailer_host', 'localhost:25') }}
-FROM = {{ config.get('mailer_from', '"Gogs" <{0}@{1}>'.format(gitea.user, salt['grains.get']('fqdn'))) }}
+FROM = {{ config.get('mailer_from', '"Gogs" <{0}@{1}>'.format(gitea.system_user, salt['grains.get']('fqdn'))) }}
 USER = {{ config.get('mailer_user', '') }}
 PASSWD = {{ config.get('mailer_passwd', '') }}
 {%- else %}
