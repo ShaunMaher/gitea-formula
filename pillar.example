@@ -7,7 +7,7 @@ gitea:
     user: git
 
     # source location of gitea binary (could also use salt://)
-    binary: https://dl.gitea.io/gitea/1.2.0/gitea-1.2.0-linux-amd64
+    binary_url: https://dl.gitea.io/gitea/1.2.0/gitea-1.2.0-linux-amd64
     # hash of the binary to install, set to '' to disable verifying the binary's hash
     binary_hash: sha256=5380d7cf6ee34f376e44354d47ee5df51a60740fd20ec4d1e55a53d9136a52b9
 
@@ -57,7 +57,7 @@ gitea:
     server_offline_mode: 'false'
 
     # 'mysql, 'postgres', or 'sqlite3' (default: sqlite3)
-    db_type: postgresql
+    db_type: postgres
     # the following are required for 'mysql' and 'postgres'
     db_host: localhost:5432
     db_name: gitea

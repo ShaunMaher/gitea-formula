@@ -17,7 +17,7 @@ values:
   data_dir: /var/lib/gitea/data
   logs_dir: /var/log/gitea
   repo_root_dir: /var/lib/gitea/repos
-  system_user: gitea
+  system_user: git
   service:
     name: gitea
 

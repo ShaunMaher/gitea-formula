@@ -28,7 +28,7 @@ gitea-service-running-service-running:
 gitea-service-failed-journalctl:
   cmd.run:
     # TODO: For systems that don't use systemd?
-    - name: journalctl -xe -u gitea.service
+    - name: journalctl -xe -u gitea.service | tail -50
     - onfail:
       - service: gitea-service-running-service-running
 
@@ -43,6 +43,6 @@ gitea-service-failed-doctor:
 gitea-service-failed-unit-file:
   cmd.run:
     # TODO: For systems that don't use systemd?
-    - name: cat /etc/systemd/system/gitea.service
+    - name: tail -50 /etc/systemd/system/gitea.service
     - onfail:
       - service: gitea-service-running-service-running
